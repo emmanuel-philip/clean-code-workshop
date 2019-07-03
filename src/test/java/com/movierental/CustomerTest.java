@@ -19,6 +19,19 @@ public class CustomerTest {
     }
 
     @Test
+    public void shouldGenerateHtmlStatementBasic() {
+        Customer testCustomer = new Customer("Emmanuel");
+        testCustomer.addRental(new Rental(new Movie("Star Wars", 1), 2));
+        testCustomer.addRental(new Rental(new Movie("Star Trek", 0), 1));
+
+        assertEquals("<h1>Rental Record for <b>Emmanuel</b></h1><br>" +
+                " Star Wars 6.0<br>" +
+                " Star Trek 2.0<br>" +
+                "Amount owed is <b>8.0</b><br>" +
+                "You earned <b>3</b> frequent renter points", testCustomer.htmlStatement());
+    }
+
+    @Test
     public void shouldGenerateStatementRegularMovieDaysRentedNotGreaterThanTwo() {
         Customer testCustomer = new Customer("Emmanuel");
         testCustomer.addRental(new Rental(new Movie("Star Wars", 0), 2));
